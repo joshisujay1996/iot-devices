@@ -10,7 +10,7 @@ from labs.module3 import TempSensorAdaptor
 #Instantiate the thread class (create a thread)
 sysTempSensAdaptor = TempSensorAdaptor.TempSensorAdaptor()
 sysTempSensAdaptor.daemon = True
-
+#here we are starting the deamon thread which runs in the background
 print("Starting system performance app daemon thread...")
 sysTempSensAdaptor.enableAdaptor=True
 

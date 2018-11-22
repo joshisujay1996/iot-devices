@@ -7,6 +7,7 @@ Created on Oct 12, 2018
 from time import sleep
 from sense_hat import SenseHat
 import threading
+#this module is used to activate the sense hat
 class SenseHatLedActivator(threading.Thread):
     enableLed  = False
     rateInSec  = 1
