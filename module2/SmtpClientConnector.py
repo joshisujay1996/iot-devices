@@ -19,6 +19,7 @@ class SmtpClientConnector(object):
         
     def publishMessage(self, topic, data):
         #here we are getting the values from the config file in order to send the email
+        #from is you email id and to is to whom you want to send the email
         host= self.config.getProperty(ConfigConst.SMTP_CLOUD_SECTION,ConfigConst.HOST_KEY)
         port= self.config.getProperty(ConfigConst.SMTP_CLOUD_SECTION,ConfigConst.PORT_KEY)
         fromAddr= self.config.getProperty(ConfigConst.SMTP_CLOUD_SECTION,ConfigConst.FROM_ADDRESS_KEY)
