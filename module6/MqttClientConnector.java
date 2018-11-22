@@ -133,6 +133,6 @@ public class MqttClientConnector implements MqttCallback
 public void messageArrived(String data, MqttMessage msg) throws Exception
 {
 //getting the message, message id and the message from the subscribed topic
- _Logger.info("Message arrived: " + data + ", " + msg.getId() +  " This is a test..."+ msg);
+ _Logger.info("Message arrived: " + data + ", " + msg.getId() + msg);
  }
 }
