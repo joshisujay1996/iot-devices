@@ -4,6 +4,7 @@ import threading
 import RPI.GPIO as GPIO
 
 class SimpleLedActivator(threading.Thread):
+    #initially the led should be switched off so we say false
     enableLed = False
     rateInSec = 1
     
@@ -18,6 +19,7 @@ class SimpleLedActivator(threading.Thread):
     def run(self):
         while True:
             if self.enableLed:
+                #we output the leds
                 GPIO.output(17, GPIO.HIGH)
                 sleep(self.rateInSec)
                 GPIO.output(17, GPIO.LOW)
