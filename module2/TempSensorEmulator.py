@@ -10,6 +10,7 @@ import threading
 from labs.common.SensorData import SensorData
 from labs.module2.SmtpClientConnector import SmtpClientConnector
 
+#This class is used to emulate the temprature of the device and we use this class in the test app to run it
 class TempSensorEmulator(threading.Thread):
     enableEmulator = False
     prevTempSet = False
