@@ -8,6 +8,7 @@ Created on Sep 22, 2018
 from time import sleep
 from labs.module2 import TempSensorEmulator
 
+#here we are initilizing the temprature sensor emulaor to get the temprature
 sysTempSensAdaptor = TempSensorEmulator.TempSensorEmulator()
 sysTempSensAdaptor.daemon = True
 
