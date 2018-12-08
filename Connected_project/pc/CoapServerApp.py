@@ -1,6 +1,6 @@
 import CoapServerConnector
 import UbiSubscribe
-
+#the server app will use the coap server class to run its methods  and act as server
 class CoapServerApp:
 
     def ConnectApp(self):
@@ -10,8 +10,10 @@ class CoapServerApp:
         coapServer   = None
 
         try:
+            #this will call the ubisubscribe class and it method to subscribeto relevant topic
             UbiSubscribe.getMe()
             CoapServer = CoapServerConnector.CoapServerConnector(ipAddr, port, useMulticast)
+            #handling excepition
             try:
                 coapServer.listen(10)
                 print("Created link to server: " + str(coapServer))
