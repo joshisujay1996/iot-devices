@@ -21,7 +21,8 @@ TLS_CERT_PATH = "/home/sujay/Desktop/git/Connected_devices_project/Module8_pytho
 '''
 Functions to process incoming and outgoing streaming
 '''
-
+#what to do on_connection if what this definition is
+#we will connect and print logs
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
 
@@ -31,14 +32,14 @@ def on_connect(client, userdata, flags, rc):
     else:
         print("[INFO] Error, connection failed")
 
-
+#method is used to publish the message to mqtt server
 def on_publish(client, userdata, result):
     print("Published!")
 
-
+#try to connect to mqtt server if sucessfull go and publish
 def connect(mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
     global connected
-
+#if not able to connect then the block belwo will run
     if not connected:
         mqtt_client.username_pw_set(mqtt_username, password=mqtt_password)
         mqtt_client.on_connect = on_connect
@@ -51,20 +52,21 @@ def connect(mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
         mqtt_client.loop_start()
 
         attempts = 0
-
+#try to connect again and agian, 5 attenmpts
         while not connected and attempts < 5:  # Wait for connection
             print(connected)
             print("Attempting to connect...")
             time.sleep(1)
             attempts += 1
 
+#if still not able to connect then print error            
     if not connected:
         print("[ERROR] Could not connect to broker")
         return False
 
     return True
 
-
+#used to publish this to ubidots with given topic name and payload
 def publish(mqtt_client, topic, payload):
 
     try:
@@ -73,7 +75,7 @@ def publish(mqtt_client, topic, payload):
     except Exception as e:
         print("[ERROR] Could not publish data, error: {}".format(e))
 
-
+#this method is calledin other class when we want to publish to ubidots
 def tempPublish(val1):
     payload = json.dumps({"value": val1 })
     # print(type(payload))
