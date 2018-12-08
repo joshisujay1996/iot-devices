@@ -19,7 +19,7 @@ TLS_CERT_PATH = "/home/sujay/Desktop/git/Connected_devices_project/Module8_pytho
 '''
 Functions to process incoming and outgoing streaming
 '''
-
+#thsi method defines what needs to be done on connec to mqtt server
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
 
@@ -28,17 +28,17 @@ def on_connect(client, userdata, flags, rc):
         connected = True  # Signal connection
     else:
         print("[INFO] Error, connection failed")
-
+#this method is defies to get the message and display 
 def on_message(client, userdata, message):
     print(message.topic + " " + str(message.payload) + " OK. Payload received")
-
+#subscribing to specfic topic 
 def on_subscribe(self, client, userdata, result):
     print("Subscribe Success!")
 
-
+#this method is used to connect to the mqtt brokerusing user id and certification
 def connect(mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
     global connected
-
+#if not connected, try to connect
     if not connected:
         mqtt_client.tls_set(ca_certs=TLS_CERT_PATH, certfile=None,
                             keyfile=None, cert_reqs=ssl.CERT_REQUIRED,
@@ -52,20 +52,20 @@ def connect(mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
         mqtt_client.loop_start()
 
         attempts = 0
-
+#try to connect again and agian, for 5 attempts
         while not connected and attempts < 5:  # Wait for connection
             print(connected)
             print("Attempting to connect...")
             time.sleep(1)
             attempts += 1
-
+#still not able to connect then there is some issue
     if not connected:
         print("[ERROR] Could not connect to broker")
         return False
 
     return True
 
-
+#subscribing to specfic topic
 def subscribe(mqtt_client, topic, payload):
 
     try:
@@ -74,7 +74,7 @@ def subscribe(mqtt_client, topic, payload):
     except Exception as e:
         print("[ERROR] Could not subscribe data, error: {}".format(e))
 
-
+#this function will be called to get the message from topic
 def getMe():
     # val1 = 39
     # payload = json.dumps({"value": val1 })
