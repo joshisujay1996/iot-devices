@@ -4,9 +4,6 @@ import time
 import json
 import ssl
 
-'''
-global variables
-'''
 
 connected = False  # Stores the connection status
 # to connect to educational ubidots
@@ -35,10 +32,10 @@ def on_connect(client, userdata, flags, rc):
 def on_publish(client, userdata, result):
     print("Published!")
 
-
+#function to connect 
 def connect(mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
     global connected
-
+#if not connected do this
     if not connected:
         mqtt_client.username_pw_set(mqtt_username, password=mqtt_password)
         mqtt_client.on_connect = on_connect
@@ -51,20 +48,20 @@ def connect(mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
         mqtt_client.loop_start()
 
         attempts = 0
-
+#if not connected still try again for 5 attempts
         while not connected and attempts < 5:  # Wait for connection
             print(connected)
             print("Attempting to connect...")
             time.sleep(1)
             attempts += 1
-
+#still not able to connect then there is some error
     if not connected:
         print("[ERROR] Could not connect to broker")
         return False
 
     return True
 
-
+#after connection is established publish the message to ubidots with given topic name and payload
 def publish(mqtt_client, topic, payload):
 
     try:
@@ -73,7 +70,7 @@ def publish(mqtt_client, topic, payload):
     except Exception as e:
         print("[ERROR] Could not publish data, error: {}".format(e))
 
-
+#this method is calledin other class when we want to publish to ubidots
 def intruderPublish(val1):
     payload = json.dumps({"value": val1 })
     # print(type(payload))
