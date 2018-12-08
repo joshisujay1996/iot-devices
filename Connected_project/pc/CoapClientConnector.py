@@ -1,12 +1,15 @@
 from coapthon.client.helperclient import HelperClient
 import ConfigUtil
 import ConfigConst
+
+#class which is instantiated in clientApp
 class CoapClient(object):
     config = None
     serverAddr = None
     host = "localhost"
     port = 5683
-
+    
+#default constructor
     def __init__(self):
         self.config=ConfigUtil.ConfigUtil(ConfigConst.DEFAULT_CONFIG_FILE_NAME)
         self.config.loadConfig()
@@ -26,7 +29,7 @@ class CoapClient(object):
 
         self.serverAddr = (self.host, self.port)
         self.url = "coap://"+self.host+":"+str(self.port)
-
+#init methods
     def initClient(self):
         try:
             self.client = HelperClient(server=("192.171.241.8", 5683))
@@ -36,7 +39,7 @@ class CoapClient(object):
         except Exception:
             print("Failed to Connect to client: "+ self.host)
             pass
-
+#to handle get request
     def GetRequestHandler(self,resource):
         print("Testing GET for resource: "+ resource)
 
@@ -53,7 +56,7 @@ class CoapClient(object):
 
         self.client.stop()
 
-
+#to handle post request
     def PostRequestHandler(self, resource, payload):
         print("Test POST for resource: "+ resource)
 
@@ -70,7 +73,7 @@ class CoapClient(object):
 
         self.client.stop()
 
-
+#to handle put request
     def PutRequestHandler(self, resource, payload):
         print("Test PUT for resource: "+ resource)
 
@@ -86,7 +89,7 @@ class CoapClient(object):
 
         self.client.stop()
 
-
+#to handle delete request
     def DeleteRequestHandler(self, resource, payload):
         print("Testing DELETE for resource: "+ resource)
 
@@ -102,7 +105,7 @@ class CoapClient(object):
 
         self.client.stop()
 
-
+#to handle server ping
     def ServerPing(self):
 
         print("ping to server")
