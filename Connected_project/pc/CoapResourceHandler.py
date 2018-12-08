@@ -11,14 +11,14 @@ class CoapResource(Resource):
         self.content_type = "text/plain"
         self.interface_type = "if1"
 
-
+#handling get request, reading from fil
     def Get_req(self, request):
         print("successfully retrieved this message from CoapResource. Payload: "+ str(self.payload))
         file_handler = open("/home/sujay/Documents/connectedFile.txt", "r")
         self.payload = file_handler.read()
         file_handler.close()
         return self
-
+#handling post request, and writing to file
     def Post_req(self, request):
         res = CoapResource()
         file_handler = open("/home/sujay/Documents/connectedFile.txt", "w")
@@ -28,12 +28,13 @@ class CoapResource(Resource):
         UbiPublish.tempPublish(1)
         UbiIntruderPublish.intruderPublish(1)
         return res
+    #handling delete request, and deleting contents in file
     def Delete_req(self, request):
         self.payload = request.payload
         file_handler = open("/home/sujay/Documents/connectedFile.txt", "w")
         file_handler.close()
         return True
-
+#handling put request, and writing to file
     def Put_req(self, request):
         self.payload = request.payload
         file_handler = open("/home/sujay/Documents/connectedFile.txt", "a")
