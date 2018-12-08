@@ -12,7 +12,7 @@ public class MqttPubClientTestApp {
 //	api in the ubi dots after login os put on place of token
 //	pemfile loction shouled be provided
 	String token = "";
-	String pemFileName = "C:\\Users\\Sujay Joshi\\Desktop\\ubidots.pem";
+	String pemFileName = "/home/sujay/Desktop/git/Connected_devices_project/Module8_python/ubidots.cert";
 
 	private static MqttPubClientTestApp _App;
 	private MqttClientConnector _clientConn;
