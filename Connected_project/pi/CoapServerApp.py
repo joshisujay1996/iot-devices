@@ -1,6 +1,6 @@
 import CoapServerConnector
 
-
+#this is importing teh coap server implemented and will run the server
 class CoapServerApp:
 
     def ConnectApp(self):
@@ -10,8 +10,11 @@ class CoapServerApp:
         coapServer   = None
 
         try:
+            #calling the server connecter and try to connect
             CoapServer = CoapServerConnector.CoapServerConnector(ipAddr, port, useMulticast)
+            #TRY AND CATCH BLOCK IS USED TO HANDLE IS THERE ARE ANY ERRORS
             try:
+                #listining if anyone wants to connect
                 coapServer.listen(10)
                 print("Created link to server: " + str(coapServer))
             except Exception:
@@ -19,7 +22,7 @@ class CoapServerApp:
                 pass
         except KeyboardInterrupt:
             print("KeyboardInterrupt Closing!!!")
-
+#CLOSE this if connected
         if CoapServer:
             coapServer.close()
 
