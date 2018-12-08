@@ -12,11 +12,11 @@ connected = False  # Stores the connection status
 # to connect to educational ubidots
 BROKER_ENDPOINT = "things.ubidots.com"
 TLS_PORT = 8883  # Secure port
-MQTT_USERNAME = "A1E-SN2m1TPckxGwihF3m8L8EosDhbs3US"  # Put here your Ubidots TOKEN
+MQTT_USERNAME = ""  # Put here your Ubidots TOKEN
 MQTT_PASSWORD = ""  # Leave this in blank
 # TOPIC = "/v1.6/devices/homeiotgateway/tempsensor"
 TOPIC = "/v1.6/devices/"
-DEVICE_LABEL = "projectiot/detectintruder"
+DEVICE_LABEL = "projectiot/sensetemprature"
 TLS_CERT_PATH = "/home/sujay/Desktop/git/Connected_devices_project/Module8_python/ubidots.cert"
 '''
 Functions to process incoming and outgoing streaming
@@ -74,12 +74,7 @@ def publish(mqtt_client, topic, payload):
         print("[ERROR] Could not publish data, error: {}".format(e))
 
 
-def main():
-    files = open("/home/sujay/Desktop/git/Connected_devices_project/IOT_Project/intruder.txt","r")
-    # print(files.read())
-    val2 = files.read()
-    val1 = int(val2)
-    # print(type(val2))
+def tempPublish(val1):
     payload = json.dumps({"value": val1 })
     # print(type(payload))
     topic = "{}{}".format(TOPIC, DEVICE_LABEL)
@@ -96,9 +91,3 @@ def main():
         time.sleep(10)
         i=i+1
     return True
-
-
-if __name__ == '__main__':
-    while True:
-        main()
-        time.sleep(10)
