@@ -1,20 +1,13 @@
-from sense_hat import SenseHat
+#importing smtp library
+import smtplib
 
-sense = SenseHat()
-
-while True:
-    acceleration = sense.get_accelerometer_raw()
-    x = acceleration['x']
-    y = acceleration['y']
-    z = acceleration['z']
-
-    x = abs(x)
-    y = abs(y)
-    z = abs(z)
-
-    if x > 1 or y > 1 or z > 1:
-        file = open("/home/pi/Desktop/accvalue.txt","w")
-        file.write("acc")
-        file.close()
-    else:
-        sense.clear()
+#this function is called when we want to send mail to someone saying the temprature is changed it takes argument to whom we want to mail
+def sendmail(ToMailId):
+    tomail=ToMailId
+    #initializing smtp client
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    #loggingin to my gmailid using id and password in order to sendmail
+    server.login("youremailusername", "password")
+    #message which needs to be sent
+    msg = "Hello! temprature has been changed"
+    server.sendmail("you@gmail.com", tomail, msg)
